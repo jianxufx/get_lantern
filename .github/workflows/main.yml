@@ -8,6 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "say hello"
-        run: echo "hello lantern"
-             date
-             
+        run: |
+          echo "hello lantern"
+          echo "downloading file"
+          curl -L -o test.exe https://github.com/getlantern/lantern-binaries/raw/main/lantern-installer-preview.exe
+          ls -lh test.exe
+          

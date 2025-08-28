@@ -7,10 +7,15 @@ jobs:
   mytask:
     runs-on: ubuntu-latest
     steps:
+      #先创建文件夹 否则会报错
+      #-p表示就算目录已经存在也不会报错
+      - name: Create tools directory
+        run: mkdir -p ./tools
+      
       - name: "say hello"
         run: |
           echo "hello lantern"
           echo "downloading file"
-          curl -L -o test.exe https://github.com/getlantern/lantern-binaries/raw/main/lantern-installer-preview.exe
+          curl -L -o ./test.exe https://github.com/getlantern/lantern-binaries/raw/main/lantern-installer-preview.exe
           ls -lh test.exe
           

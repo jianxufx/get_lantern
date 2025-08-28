@@ -2,4 +2,9 @@ on:
   schedule:
    - cron: "0 3 * * 0"
 
-  
+jobs:
+  mytask:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "say hello"
+        run: echo "hello lantern"

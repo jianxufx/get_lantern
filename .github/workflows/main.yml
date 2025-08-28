@@ -42,6 +42,6 @@ jobs:
           #把缓存区的信息保存到本地仓库
           git commit -m "Add/update tools folder"
           
-          #把本地仓库同步到github
+          #把本地仓库同步到github，必须使用TOKEN，否则出错
           git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/jianxufx/get_lantern.git HEAD:main
           

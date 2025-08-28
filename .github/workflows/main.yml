@@ -42,5 +42,5 @@ jobs:
           git commit -m "Add/update tools folder"
           
           #把本地仓库同步到github
-          git push
+          git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/jianxufx/get_lantern.git HEAD:main
           

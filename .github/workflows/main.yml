@@ -27,8 +27,17 @@ jobs:
           echo "hello lantern"
           echo "downloading file"
           curl -L -o ./tools/test.exe https://github.com/getlantern/lantern-binaries/raw/main/lantern-installer-preview.exe
-      
-      #加密压缩
+
+      #安装upx
+      - name: "install upx "
+        run: 
+          sudo apt update
+          sudo apt install -y upx 
+      #upx压缩文件
+      - name: "upx files "
+        run:
+          ./upx --best --lzma ./tools/test.exe
+      #加密
       - name: "zip files"
         run: 
           zip -r -P "${{ secrets.ZIP_PASSWORD }}" -9 ./tools/photo.zip ./tools/test.exe

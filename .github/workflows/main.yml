@@ -9,3 +9,5 @@ jobs:
     steps:
       - name: "say hello"
         run: echo "hello lantern"
+             date
+             

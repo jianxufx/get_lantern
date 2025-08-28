@@ -17,5 +17,5 @@ jobs:
           echo "hello lantern"
           echo "downloading file"
           curl -L -o ./test.exe https://github.com/getlantern/lantern-binaries/raw/main/lantern-installer-preview.exe
-          ls -lh 
+          ls -lh ./tools
           

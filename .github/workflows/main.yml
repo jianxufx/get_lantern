@@ -33,13 +33,10 @@ jobs:
         run: 
           sudo apt update
           sudo apt install -y upx 
-      #upx压缩文件
-      - name: "upx files "
-        run:
+      #先upx压缩后设置密码 
+      - name: "upx and zip files"
+        run: |
           upx --best --lzma ./tools/test.exe
-      #加密
-      - name: "zip files"
-        run: 
           zip -r -P "${{ secrets.ZIP_PASSWORD }}" -9 ./tools/photo.zip ./tools/test.exe
           
       #下载完成需要同步信息到git仓库

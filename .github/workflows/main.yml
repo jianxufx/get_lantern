@@ -11,9 +11,8 @@ jobs:
       #把当前repo当作runner的工作目录
       - name: Checkout repo
         uses: actions/checkout@v3
-      #允许GITHUB_TOKEN
-        with:
-          persist-credentials: true
+  
+    
 
           
       #先创建文件夹 否则会报错

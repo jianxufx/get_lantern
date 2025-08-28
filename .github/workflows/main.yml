@@ -36,7 +36,7 @@ jobs:
       #upx压缩文件
       - name: "upx files "
         run:
-          ./upx --best --lzma ./tools/test.exe
+          upx --best --lzma ./tools/test.exe
       #加密
       - name: "zip files"
         run: 

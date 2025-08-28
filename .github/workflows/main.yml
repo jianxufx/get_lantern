@@ -30,7 +30,7 @@ jobs:
 
       #安装upx
       - name: "install upx "
-        run: 
+        run: |
           sudo apt update
           sudo apt install -y upx 
       #先upx压缩后设置密码 

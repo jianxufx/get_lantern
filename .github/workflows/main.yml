@@ -7,15 +7,37 @@ jobs:
   mytask:
     runs-on: ubuntu-latest
     steps:
+
+      #把当前repo当作runner的工作目录
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        
       #先创建文件夹 否则会报错
       #-p表示就算目录已经存在也不会报错
       - name: Create tools directory
         run: mkdir -p ./tools
       
+      #下载文件
       - name: "say hello"
         run: |
           echo "hello lantern"
           echo "downloading file"
           curl -L -o ./tools/test.exe https://github.com/getlantern/lantern-binaries/raw/main/lantern-installer-preview.exe
-          ls -lh ./tools
+     
+      #下载完成需要同步信息到git仓库
+      - name: Commit and push tools folder
+        run: |
+
+          #本次更改人的信息
+          git config user.name  "terry"
+          git config user.email "terry@hellowolrd.com"
+          
+          #添加更改到缓存区
+          git add ./tools
+          
+          #把缓存区的信息保存到本地仓库
+          git commit -m "Add/update tools folder"
+          
+          #把本地仓库同步到github
+          git push
           

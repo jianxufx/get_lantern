@@ -43,13 +43,18 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y upx zip
-          
+         
       # 压缩并加密码
       - name: Compress and password protect file
         run: |
+          #压缩之前删除无用的重复的ZIP文件
+          
+          find ./tools -name "*.zip" -delete
+          
           echo "准备压缩文件: $FILENAME"
           upx --best --lzma ./tools/"$FILENAME"
-          zip -r -j -P "${{ secrets.ZIP_PASSWORD }}" -9 ./tools/123.zip ./tools/"$FILENAME"
+          cd ./tools
+          zip -r -j -P "${{ secrets.ZIP_PASSWORD }}" -9 123.zip "$FILENAME"
           
       # 下载完成需要同步信息到git仓库
       - name: Commit and push tools folder

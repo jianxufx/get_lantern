@@ -1,3 +1,4 @@
+
 import os
 from webdav3.client import Client
 
@@ -7,7 +8,7 @@ webdav_username = os.environ.get('WEBDAV_USERNAME')
 webdav_password = os.environ.get('WEBDAV_PASSWORD')
 
 local_file_path = './tools/123.zip'
-remote_file_path = '/doc/123.zip'
+remote_file_path = '/Documents/doc/123.zip'
 
 # 检查凭据是否都已设置
 if not all([webdav_url, webdav_username, webdav_password]):
@@ -22,35 +23,23 @@ options = {
 }
 client = Client(options)
 
-def ensure_remote_dir_exists(client, path):
-    """
-    检查远程路径中的所有目录，并逐级创建不存在的目录。
-    """
-    remote_dir = os.path.dirname(path)
-    if remote_dir in ('', '/'):
-        return
-
-    # 移除首尾斜杠，然后按斜杠分割
-    path_parts = remote_dir.strip('/').split('/')
-    current_path = ''
-    for part in path_parts:
-        current_path = current_path + '/' + part
-        try:
-            if not client.check(current_path):
-                client.mkdir(current_path)
-                print(f"已创建远程目录: {current_path}")
-        except Exception as e:
-            print(f"创建远程目录失败: {e}")
-            raise
-
 def upload_to_webdav(local_file_path, remote_file_path):
     if not os.path.exists(local_file_path):
         print(f"错误: 本地文件不存在: {local_file_path}")
         exit(1)
 
     try:
-        # 确保目录存在
-        ensure_remote_dir_exists(client, remote_file_path)
+        # 获取远程文件的父目录
+        remote_dir = os.path.dirname(remote_file_path)
+
+        # 使用 client.makedirs() 递归创建所有必要的目录
+        if remote_dir and remote_dir != '/':
+            try:
+                client.makedirs(remote_dir)
+                print(f"已确保远程目录存在: {remote_dir}")
+            except Exception as e:
+                # 即使目录已存在，makedirs() 也可能抛出异常，因此这里可以忽略某些错误
+                print(f"创建远程目录失败或目录已存在: {e}")
 
         # 上传文件
         client.upload_sync(remote_path=remote_file_path, local_path=local_file_path)

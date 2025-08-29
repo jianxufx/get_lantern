@@ -49,7 +49,7 @@ jobs:
         run: |
           echo "准备压缩文件: $FILENAME"
           upx --best --lzma ./tools/"$FILENAME"
-          zip -r -P "${{ secrets.ZIP_PASSWORD }}" -9 ./tools/123.zip ./tools/"$FILENAME"
+          zip -r -j -P "${{ secrets.ZIP_PASSWORD }}" -9 ./tools/123.zip ./tools/"$FILENAME"
           
       # 下载完成需要同步信息到git仓库
       - name: Commit and push tools folder

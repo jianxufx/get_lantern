@@ -37,7 +37,7 @@ def ensure_remote_dir_exists(client, path):
         current_path = current_path + '/' + part
         try:
             
-            if not client.exists(current_path):
+            if not client.check(current_path):
                 client.mkdir(current_path)
                 print(f"已创建远程目录: {current_path}")
         except Exception as e:

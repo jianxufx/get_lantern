@@ -15,13 +15,23 @@ if not all([webdav_host, webdav_username, webdav_password]):
     print("错误: WebDAV 凭据环境变量未设置。")
     exit(1)
 
+
+
+
+
+
+
+
 def upload_to_webdav(local_file_path, remote_file_path):
+    
+    host = webdav_host.replace('https://', '').replace('http://', '')
+    protocol = 'https' if webdav_url.startswith('https://') else 'http'
     try:
-        webdav = easywebdav.connect(
+        webdav = easywebdav.Client(
             host=webdav_host,
             username=webdav_username,
             password=webdav_password,
-            protocol='https' if webdav_host.startswith('https://') else 'http'
+            protocol='https' 
         )
 
         # 从远程路径中提取目录部分 检测远程目录是否存在，不存在则创建

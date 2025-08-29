@@ -1,0 +1,11 @@
+#action的触发事件
+on:
+  #以计划任务的方式触发
+  schedule:
+    #每周日的凌晨4点
+    - cron: "0 4 * * 0"
+  #手动触发
+  workflow_dispatch:
+    
+jobs:
+  

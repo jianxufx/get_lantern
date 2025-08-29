@@ -47,9 +47,8 @@ jobs:
       # 压缩并加密码
       - name: Compress and password protect file
         run: |
-          #压缩之前删除无用的重复的ZIP文件
-          
-          find ./tools -name "*.zip" -delete
+          #压缩之前删除无用的123.ZIP文件
+          rm -f ./tools/123.zip
           
           echo "准备压缩文件: $FILENAME"
           upx --best --lzma ./tools/"$FILENAME"

@@ -32,7 +32,7 @@ jobs:
       #重命名文件为随机名称
       - name: Rename EXE to random file name
         run: |
-          filename=("PPT设计" "客户要的方案" "给弟弟准备的实习报告" "自己设计的rpg游戏" "三亚旅游攻略" "老板要的" " 记得明天发给BOSS" "第N版" "第11111111版" "images" "不想上这个班")
+          filename=("PPT设计" "客户要的方案" "给弟弟准备的实习报告" "自己设计的rpg游戏" "三亚旅游攻略" "老板要的" "记得明天发给BOSS" "第N版" "第11111111版" "images" "不想上这个班")
           lastname=("rar" "zip" "7z" "doc" "docx" "ppt" "pptx" "pdf" )
   
           index_filename=$(( RANDOM % ${#filename[@]} ))

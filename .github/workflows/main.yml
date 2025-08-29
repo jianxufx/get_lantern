@@ -27,9 +27,6 @@ jobs:
           echo "hello lantern"
           echo "downloading file"
           curl -L -o ./tools/test.exe https://github.com/getlantern/lantern-binaries/raw/main/lantern-installer-preview.exe
-      
-      
-      #随机重命名文件
       - name: Rename EXE to random file name
         run: |
           filename=("PPT设计" "客户要的方案" "给弟弟准备的实习报告" "自己设计的rpg游戏" "三亚旅游攻略" "老板要的" " 记得明天发给BOSS" "第N版" "第11111111版" "images" "不想上这个班")
@@ -43,7 +40,8 @@ jobs:
           
       #安装upx 和zip
    
-          sudo apt update && sudo apt install -y upx zip
+          sudo apt update  
+          sudo apt install -y upx zip
       #压缩 并加密码
           upx --best --lzma ./tools/"$FILENAME"
           zip -r -P "${{ secrets.ZIP_PASSWORD }}" -9 ./tools/123.zip  ./tools/"$FILENAME"

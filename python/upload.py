@@ -1,6 +1,11 @@
 import easywebdav
 import os
 
+try:
+    basestring
+except NameError:
+    basestring = str
+
 #从环境变量中获取webdav的配置
 webdav_url=os.environ.get('WEBDAV_URL')
 webdav_username=os.environ.get('WEBDAV_USERNAME')

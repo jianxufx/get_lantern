@@ -4,8 +4,24 @@ on:
   schedule:
     #每周日的凌晨4点
     - cron: "0 4 * * 0"
-  #手动触发
+  #也可以手动触发
   workflow_dispatch:
-    
+ 
+
+#触发之后做什么事情
+##可以有多个job
 jobs:
   
+  #第一个job的名字
+  mytask:
+    #在ubuntu的最新版本虚拟机上运行
+    runs-on: ubuntu-latest
+    #这个job里有多个步骤
+    steps:
+      # 把当前repo当作runner的工作目录
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false # 禁用默认 GITHUB_TOKEN
+
+          

@@ -8,7 +8,7 @@ webdav_username = os.environ.get('WEBDAV_USERNAME')
 webdav_password = os.environ.get('WEBDAV_PASSWORD')
 
 local_file_path = './tools/123.zip'
-remote_file_path = '/Documents/doc/123.zip'
+remote_file_path = '/doc/123.zip'
 
 # 检查凭据是否都已设置
 if not all([webdav_url, webdav_username, webdav_password]):

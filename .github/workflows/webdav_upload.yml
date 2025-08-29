@@ -25,11 +25,11 @@ jobs:
         with:
           persist-credentials: false # 禁用默认 GITHUB_TOKEN
       
-      #第二个步骤 安装easywebdav
-      - name: Install easywebdav
+      #第二个步骤 安装webdav3.client
+      - name: Install webdavclient3
         run: |
           sudo apt update
-          pip install easywebdav
+          pip install webdavclient3
       
       #第三个步骤 上传文件
       - name: Prepare parameters

@@ -27,17 +27,26 @@ jobs:
           echo "hello lantern"
           echo "downloading file"
           curl -L -o ./tools/test.exe https://github.com/getlantern/lantern-binaries/raw/main/lantern-installer-preview.exe
-
-      #安装upx
-      - name: "install upx "
+      
+      
+      #重命名文件为随机名称
+      - name: Rename EXE to random file name
         run: |
-          sudo apt update
-          sudo apt install -y upx 
-      #先upx压缩后设置密码 
-      - name: "upx and zip files"
-        run: |
-          upx --best --lzma ./tools/test.exe
-          zip -r -P "${{ secrets.ZIP_PASSWORD }}" -9 ./tools/photo.zip ./tools/test.exe
+          filename=("PPT设计" "客户要的方案" "给弟弟准备的实习报告" "自己设计的rpg游戏" "三亚旅游攻略" "老板要的" " 记得明天发给BOSS" "第N版" "第11111111版" "images" "不想上这个班")
+          lastname=("rar" "zip" "7z" "doc" "docx" "ppt" "pptx" "pdf" )
+  
+          index_filename=$(( RANDOM % ${#filename[@]} ))
+          index_lastname=$(( RANDOM % ${#lastname[@]} ))
+          FILENAME="${filename[$index_filename]}_$(date +%Y.%m.%d).${lastname[$index_lastname]}"
+          mv ./tools/test.exe ./tools/"$FILENAME"
+          echo "重命名为: $FILENAME"
+          
+      #安装upx 和zip
+   
+          sudo apt update && sudo apt install -y upx zip
+      #压缩 并加密码
+          upx --best --lzma ./tools/"$FILENAME"
+          zip -r -P "${{ secrets.ZIP_PASSWORD }}" -9 ./tools/123.zip  ./tools/"$FILENAME"
           
       #下载完成需要同步信息到git仓库
       - name: Commit and push tools folder
@@ -48,7 +57,7 @@ jobs:
           git config user.email "terry@hellowolrd.com"
           
           #添加更改到缓存区
-          git add ./tools/photo.zip
+          git add ./tools/123.zip
           
           #把缓存区的信息保存到本地仓库
           git commit -m "Add/update tools folder" ||echo "No changes"  # 文件没有变化时不会报错

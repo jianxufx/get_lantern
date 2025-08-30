@@ -23,7 +23,7 @@ def test_webdav_connection():
         print("正在测试 WebDAV 连接...")
         
         # 尝试列出根目录，如果成功则证明连接和权限正常
-        client.list('/')
+        client.list('/我的坚果云/doc/')
         
         print("WebDAV 连接和读取权限测试成功！")
         return True

@@ -39,4 +39,4 @@ jobs:
           WEBDAV_PASSWORD: ${{ secrets.WEBDAV_PASSWORD }}
   
         run: |
-          python ./python/upload.py
+          python ./python/list.py

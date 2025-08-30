@@ -22,7 +22,7 @@ def list_root_contents():
     try:
         print("正在测试 WebDAV 连接并列出根目录下的所有内容...")
         
-        root_contents = client.list('/')
+        root_contents = client.list('/dav/doc')
         
         print("\n连接成功！根目录下的文件/文件夹列表如下：")
         

@@ -17,15 +17,23 @@ options = {
 }
 client = Client(options)
 
-def test_webdav_connection():
-    """仅测试 WebDAV 连接是否成功，不打印文件列表。"""
+def list_root_contents():
+    """测试 WebDAV 连接并列出根目录下所有内容。"""
     try:
-        print("正在测试 WebDAV 连接...")
+        print("正在测试 WebDAV 连接并列出根目录下的所有内容...")
         
-        # 尝试列出根目录，如果成功则证明连接和权限正常
-        client.list('/我的坚果云/doc/')
+        root_contents = client.list('/')
         
-        print("WebDAV 连接和读取权限测试成功！")
+        print("\n连接成功！根目录下的文件/文件夹列表如下：")
+        
+        for item in root_contents:
+            if 'href' in item:
+                # 打印出完整的相对路径，包括文件名
+                print(f"- {item['href']}")
+            elif 'name' in item:
+                print(f"- {item['name']}")
+                
+        print("\n--------------------")
         return True
     except Exception as e:
         print("WebDAV 连接失败或读取权限不足！")
@@ -33,6 +41,4 @@ def test_webdav_connection():
         return False
 
 if __name__ == "__main__":
-    if not test_webdav_connection():
-        # 如果连接失败，可以选择在这里退出，防止后续操作
-        exit(1)
+    list_root_contents()
